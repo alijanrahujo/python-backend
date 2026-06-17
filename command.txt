@@ -1,0 +1,11 @@
+//for create venv
+python -m venv .venv
+
+//for active venv
+.venv\Scripts\activate
+
+//for flask install
+python -m pip install flask
+
+//for run project
+python app.py
