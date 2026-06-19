@@ -1,0 +1,25 @@
+{% extends 'web.html' %}
+{% block content %}
+
+    <div class="form">
+        <h1 class="text-center">Contact us</h1>
+        <form action="" method="get">
+            <div class="form-group mb-3">
+                <label>Name</label>
+                <input type="text" name="name" class="form-control">
+            </div>
+            <div class="form-group mb-3">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control">
+            </div>
+            <div class="form-group mb-3">
+                <label>Message</label>
+                <textarea name="message" class="form-control"></textarea>
+            </div>
+            <div class="form-group mb-3">
+                <button class="btn btn-dark">Submit</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
