@@ -1,0 +1,21 @@
+{% extends 'web.html' %}
+{% block content %}
+
+{% set t = table | int %}
+
+<h1>Lec 4</h1>
+<h4>{{name}}</h4>
+<h3>Table of {{table}}</h3>
+
+{% if t !=5 %}
+
+    {% for a in range(1,11) %}
+
+    <div class="p-1 bg-success mb-1 text-white">{{table}} x {{a}} = {{t * a}}</div>
+
+    {% endfor %}
+{% else %}
+    <div class="alert alert-danger">You can not run table of 5</div>
+{% endif %}
+
+{% endblock %}
