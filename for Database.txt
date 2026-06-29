@@ -1,0 +1,37 @@
+# Install Database
+python -m pip install sqlalchemy
+python -m pip install flask_sqlalchemy
+
+# Import File
+from flask_sqlalchemy import SQLAlchemy
+
+# Configure SQLite local database file path
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Initialize the database extension
+db = SQLAlchemy(app)
+
+# --- DATABASE MODEL ---
+class Task(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.String(500), nullable=True)
+    completed = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return f'<Task {self.id}>'
+
+
+# For insert Task
+new_task = Task(title=title, description=description)
+db.session.add(new_task)
+db.session.commit()
+
+
+# For Fetch Data
+# Fetch all tasks ordered by their ID
+tasks = Task.query.order_by(Task.id).all()
+
+with app.app_context():
+    db.create_all()

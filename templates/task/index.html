@@ -1,0 +1,36 @@
+{% extends "web.html" %}
+
+{% block content %}
+
+<h1 class="text-center">Task List</h1>
+
+<div class="my-4">
+    <a href="/task/create" class="btn btn-primary">Create Task</a>
+</div>
+
+<table class="table">
+    <thead>
+        <th>Sr</th>
+        <th>Task</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+    {% for task in tasks %}
+    <tr>
+        <td>{{ task['id'] }}</td>
+        <td>{{ task['title'] }}</td>
+        <td>{{ task['description'] }}</td>
+        <td>{{ task['status'] }}</td>
+        <td>
+            <a href="" class="btn btn-primary">Show</a>
+            <a href="" class="btn btn-warning">Edit</a>
+            <a href="" class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

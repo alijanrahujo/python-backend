@@ -1,0 +1,21 @@
+{% extends 'web.html' %}
+{% block content %}
+
+<h1 class="text-center">Create Task</h1>
+
+<form action="/task/create" method="post">
+    <div class="form-group">
+        <label>Task</label>
+        <input type="text" name="name" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <textarea name="description" class="form-control"></textarea>
+    </div>
+    
+    <div class="form-group mt-3">
+        <button class="btn btn-primary">Save Task</button>
+    </div>
+</form>
+
+{% endblock %}
