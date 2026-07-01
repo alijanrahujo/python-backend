@@ -1,0 +1,44 @@
+{% extends 'web.html' %}
+{% block content %}
+
+<h1 class="text-center">Edit Student</h1>
+
+<form action="/student/edit/{{ student.id }}" method="post">
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="name" value="{{ student.name }}" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Father Name</label>
+        <input type="text" name="fathername" value="{{ student.fathername }}" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Date of Birth</label>
+        <input type="date" name="dob" value="{{ student.dob }}" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Contact No</label>
+        <input type="text" name="contact" value="{{ student.contact }}" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Course</label>
+        <select name="course" class="form-control">
+            <option value="">Select Course</option>
+            <option {% if student.course == 'DIT' %}selected{% endif %}>DIT</option>
+            <option {% if student.course == 'CIT' %}selected{% endif %}>CIT</option>
+            <option {% if student.course == 'Web Development' %}selected{% endif %}>Web Development</option>
+            <option {% if student.course == 'Python' %}selected{% endif %}>Python</option>
+        </select>
+    </div>
+   
+    
+    <div class="form-group mt-3">
+        <button class="btn btn-primary">Update Student</button>
+    </div>
+</form>
+
+{% endblock %}

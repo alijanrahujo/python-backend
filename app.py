@@ -135,6 +135,32 @@ def studentCreate():
         
     return render_template('student/create.html')
 
+@app.route('/student/edit/<id>', methods=['GET', 'POST'])
+def studentEdit(id):
+    student = Student.query.get_or_404(id)
+
+    if request.method == 'POST':
+        # return request.form.get('name')
+        # return student.name
+        student.name = request.form.get('name')
+        student.fathername = request.form.get('fathername')
+        dob = request.form.get('dob')
+        student.dob = datetime.strptime(dob, "%Y-%m-%d").date() if dob else None
+        student.contact = request.form.get('contact')
+        student.course = request.form.get('course')
+        db.session.commit()
+
+        return redirect(url_for('student'))
+
+    return render_template('student/edit.html', student=student)
+
+@app.route('/student/delete/<id>', methods=['get'])
+def studentDelete(id):
+    student = Student.query.get_or_404(id)
+    db.session.delete(student)
+    db.session.commit()
+    return redirect(url_for('student'))
+
 with app.app_context():
     db.create_all()
 

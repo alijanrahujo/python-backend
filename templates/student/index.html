@@ -27,8 +27,8 @@
             <td>{{student.course}}</td>
             <td>
                 <a href="" class="btn btn-primary">Show</a>
-                <a href="" class="btn btn-warning">Edit</a>
-                <a href="" class="btn btn-danger">Delete</a>
+                <a href="/student/edit/{{ student.id }}" class="btn btn-warning">Edit</a>
+                <a href="/student/delete/{{ student.id }}" onclick="return confirm('Are you sure want to delete this record?')" class="btn btn-danger">Delete</a>
             </td>
         </tr>
     {% endfor %}
