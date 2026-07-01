@@ -1,0 +1,38 @@
+{% extends "web.html" %}
+
+{% block content %}
+
+<h1 class="text-center">Student List</h1>
+
+<div class="my-4">
+    <a href="/student/create" class="btn btn-primary">Create Student</a>
+</div>
+
+<table class="table">
+    <thead>
+        <th>Sr</th>
+        <th>Name</th>
+        <th>Father Name</th>
+        <th>Contact No</th>
+        <th>Course</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+    {% for student in students %}
+        <tr>
+            <td>{{student.id}}</td>
+            <td>{{student.name}}</td>
+            <td>{{student.fathername}}</td>
+            <td>{{student.contact}}</td>
+            <td>{{student.course}}</td>
+            <td>
+                <a href="" class="btn btn-primary">Show</a>
+                <a href="" class="btn btn-warning">Edit</a>
+                <a href="" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

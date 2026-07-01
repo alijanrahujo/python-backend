@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
 
 app = Flask(__name__)
 
@@ -14,6 +16,18 @@ class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     description = db.Column(db.String(500), nullable=True)
+    status = db.Column(db.Boolean, default=True)
+
+    def __repr__(self):
+        return f'<Task {self.id}>'
+    
+class Student(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    fathername = db.Column(db.String(50), nullable=True)
+    dob = db.Column(db.Date, nullable=True)
+    contact = db.Column(db.String(15), nullable=True)
+    course = db.Column(db.String(255), nullable=True)
     status = db.Column(db.Boolean, default=True)
 
     def __repr__(self):
@@ -97,6 +111,29 @@ def Taskcreate():
         return redirect(url_for('Taskindex'))
 
     return render_template('task/create.html')
+
+@app.route('/student')
+def student():
+    students = Student.query.order_by(Student.id).all()
+    return render_template('student/index.html',students=students)
+
+@app.route('/student/create',methods=['get','POST'])
+def studentCreate():
+    if request.method == "POST":
+        name = request.form.get('name')
+        fathername = request.form.get('fathername')
+        dob = request.form.get('dob')
+        contact = request.form.get('contact')
+        course = request.form.get('course')
+        
+        dob = datetime.strptime(dob, "%Y-%m-%d").date() if dob else None
+
+        query = Student(name=name,fathername=fathername,dob=dob,contact=contact,course=course)
+        db.session.add(query)
+        db.session.commit()
+        return redirect(url_for('student'))
+        
+    return render_template('student/create.html')
 
 with app.app_context():
     db.create_all()
